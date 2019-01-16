@@ -1,0 +1,20 @@
+<script src="../../public/js/sockjs-1.3.0.min.js"></script>
+
+<script>   
+
+    var sock = new SockJS('http://www.seismicportal.eu/standing_order');
+
+	sock.onopen = function() {
+        console.log('connected');
+    };
+
+	sock.onmessage = function(e) {
+        msg = JSON.parse(e.data);
+	    console.log('message received : ', msg);
+	};
+
+	sock.onclose = function() {
+        console.log('disconnected');
+	};
+
+</script>  
