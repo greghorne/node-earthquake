@@ -1,4 +1,5 @@
 <!-- <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script> -->
+<!-- <script src='https://code.jquery.com/jquery-3.3.1.min.js'></script> -->
 
 <script>   
 
@@ -6,12 +7,12 @@
 
     ws.onopen = () => {
         // websocket connection opened
-        console.log('ws opened on browser')
+        console.log('websocket opened on browser')
 
         // keep websocket connection open by sending a message to the server every 5 minutes
         setTimeout(function() {
             ws.send("ping")
-            console.log("ws server pinged");
+            console.log("websocket server pinged");
         }, 300000);
     }
 
@@ -22,18 +23,21 @@
 
     ws.onclose = (event) => {
         // websocket connection closed
-        console.log("ws closed")
+        console.log("websocket closed")
         console.log(event);
         ws = new WebSocket('ws://www.seismicportal.eu/standing_order/websocket')
     }
 
 
-    // when browser is closed or navigates awayw
-    window.beforeonunload = function() {
+    // when browser is closed or navigates away close the webbsocket
+    // $(window).on("beforeunload", function() {
+    window.onbeforeunload = function(event) {
+        console.log("browser going away");
+
         // disable ws.onclose() function
         ws.onclose = function() {};
         ws.close();
-    }
+    };
 
 
 </script>  
