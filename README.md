@@ -18,7 +18,7 @@ Cross-Origin Read Blocking (CORB) blocked cross-origin response http://www.seism
 The issue I believe is: 
 header contains multiple values 'http://0.0.0.0:3000, *, *', but only one is allowed
 
-The best I can tell is that this is a server side issue.
+The best I can tell is that this is a server side issue and it is not my server.
 
 I was attempting to test the JS code found at: http://www.seismicportal.eu/realtime.html
 
