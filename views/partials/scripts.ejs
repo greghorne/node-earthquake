@@ -9,11 +9,20 @@
     }
 
     ws.onmessage = (message) => {
-        console.log(`message received`, message.data)
+        console.log(message.data)
     }
 
-    ws.onclose = () => {
+    ws.onclose = (event) => {
         console.log("ws closed")
+        console.log(event);
     }
+
+    ws.onopen = () => {
+        setTimeout(function() {
+            ws.send("I'm still here")
+        }, 300000);
+        console.log("ws pinged");
+    }
+
 
 </script>  
