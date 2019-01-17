@@ -5,23 +5,36 @@
     const ws = new WebSocket('ws://www.seismicportal.eu/standing_order/websocket')
 
     ws.onopen = () => {
+        // websocket connection opened
         console.log('ws opened on browser')
     }
 
     ws.onmessage = (message) => {
+        // message from server
         console.log(message.data)
     }
 
     ws.onclose = (event) => {
+        // websocket connection closed
         console.log("ws closed")
         console.log(event);
     }
 
     ws.onopen = () => {
+
+        // keep websocket connection open by sending a message to the server every 5 minutes
         setTimeout(function() {
             ws.send("I'm still here")
         }, 300000);
-        console.log("ws pinged");
+
+        console.log("ws server pinged");
+    }
+
+    // when browser is closed or navigates awayw
+    window.beforeonunload = function() {
+        // disable ws.onclose() function
+        ws.onclose = function() {};
+        ws.close();
     }
 
 
