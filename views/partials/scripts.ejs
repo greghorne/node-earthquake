@@ -1,24 +1,19 @@
-<script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
+<!-- <script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script> -->
 
 <script>   
 
-    try {
-        var sock = new SockJS('http://www.seismicportal.eu/standing_order');
-    } catch (e) {
-        console.log(e)
+    const ws = new WebSocket('ws://www.seismicportal.eu/standing_order/websocket')
+
+    ws.onopen = () => {
+        console.log('ws opened on browser')
     }
 
-	sock.onopen = function() {
-        console.log('connected');
-    };
+    ws.onmessage = (message) => {
+        console.log(`message received`, message.data)
+    }
 
-	sock.onmessage = function(e) {
-        msg = JSON.parse(e.data);
-	    console.log('message received : ', msg);
-	};
-
-	sock.onclose = function() {
-        console.log('disconnected');
-	};
+    ws.onclose = () => {
+        console.log("ws closed")
+    }
 
 </script>  
