@@ -9,11 +9,7 @@
         // websocket connection opened
         console.log('websocket opened on browser')
 
-        // keep websocket connection open by sending a message to the server every 5 minutes
-        setTimeout(function() {
-            ws.send("ping")
-            console.log("websocket server pinged");
-        }, 30000);
+
     }
 
     ws.onmessage = (message) => {
@@ -38,6 +34,12 @@
         ws.onclose = function() {};
         ws.close();
     };
+
+    // keep websocket connection open by sending a message to the server every 5 minutes
+    setTimeout(function() {
+        ws.send("ping")
+        console.log("websocket server pinged");
+    }, 15000);
 
 
 </script>  
