@@ -13,7 +13,7 @@
         setTimeout(function() {
             ws.send("ping")
             console.log("websocket server pinged");
-        }, 300000);
+        }, 30000);
     }
 
     ws.onmessage = (message) => {
@@ -22,7 +22,7 @@
     }
 
     ws.onclose = (event) => {
-        // websocket connection closed
+        // websocket connection closes for unknown reason thus open a connection again
         console.log("websocket closed")
         console.log(event);
         ws = new WebSocket('ws://www.seismicportal.eu/standing_order/websocket')
