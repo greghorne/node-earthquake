@@ -8,16 +8,15 @@
 
     ws.onmessage = (message) => {
         console.log("data received");
-        console.log(message.data);
+        console.log(message.data);          // earthquake data received
     }
 
     ws.onclose = (event) => {
         console.log("websocket closed");
         console.log(event);
+        location.reload(true);
     }
 
-
-    // when browser is closed or navigates away close the webbsocket
     window.onbeforeunload = (event) => {
         console.log("browser going away (close or redirect)");
         // ws.onclose = function() {};
@@ -29,7 +28,7 @@
     // keep websocket connection open by sending a message to the server every 5 minutes
     window.setInterval = (function() {
         ws.send("ping");
-        console.log("ping...", counter);
+        console.log(">>>>>>>>>> ping...", counter);
         counter++;
     }, 300000);
 
