@@ -1,36 +1,50 @@
 <script>   
 
-    var ws = new WebSocket('ws://www.seismicportal.eu/standing_order/websocket')
+    var ws;
+    
+    (function openWebSocket() {
+        ws = new WebSocket('ws://www.seismicportal.eu/standing_order/websocket')
 
-    ws.onopen = () => {
-        console.log("websocket opened");
-    }
+        ws.onopen = (e) => {
+            console.log("websocket opened");
+            console.log(e)
+        }
 
-    ws.onmessage = (message) => {
-        console.log("data received");
-        console.log(message.data);          // earthquake data received
-    }
+        ws.onmessage = (message) => {
+            console.log("data received");
+            console.log(message.data);          // earthquake data received
+        }
 
-    ws.onclose = (event) => {
-        console.log("websocket closed");
-        console.log(event);
-        location.reload(true);
-    }
+        ws.onclose = (event) => {
+            console.log("websocket closed");
+            console.log(event);
+            // location.reload(true);
+            openWebSocket();
 
-    window.onbeforeunload = (event) => {
-        console.log("browser going away (close or redirect)");
-        // ws.onclose = function() {};
-        ws.close();
-    };
+        }
 
-    var counter = 1;
+        ws.onerror = (event) => {
+            console.log("onerror");
+            console.log(event);
+        }
+
+        window.onbeforeunload = (event) => {
+            console.log("browser going away (close or redirect)");
+            ws.onclose = function() {};
+            ws.close();
+        };
+    })();
+
+
+
+    // var counter = 1;
 
     // keep websocket connection open by sending a message to the server every 5 minutes
-    window.setInterval = (function() {
-        ws.send("ping");
-        console.log(">>>>>>>>>> ping...", counter);
-        counter++;
-    }, 300000);
+    // window.setInterval = (function() {
+    //     ws.send("ping-keep-socket-open");
+    //     console.log(">>>>>>>>>> ping...", counter);
+    //     counter++;
+    // }, 300000);
 
 
 </script>  
