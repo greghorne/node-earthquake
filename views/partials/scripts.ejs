@@ -5,9 +5,9 @@
     (function openWebSocket() {
         ws = new WebSocket('ws://www.seismicportal.eu/standing_order/websocket')
 
-        ws.onopen = (e) => {
+        ws.onopen = (event) => {
             console.log("websocket opened");
-            console.log(e)
+            console.log(event)
         }
 
         ws.onmessage = (message) => {
@@ -18,13 +18,11 @@
         ws.onclose = (event) => {
             console.log("websocket closed");
             console.log(event);
-            // location.reload(true);
             openWebSocket();
-
         }
 
         ws.onerror = (event) => {
-            console.log("onerror");
+            console.log("websocket error");
             console.log(event);
         }
 
@@ -34,17 +32,5 @@
             ws.close();
         };
     })();
-
-
-
-    // var counter = 1;
-
-    // keep websocket connection open by sending a message to the server every 5 minutes
-    // window.setInterval = (function() {
-    //     ws.send("ping-keep-socket-open");
-    //     console.log(">>>>>>>>>> ping...", counter);
-    //     counter++;
-    // }, 300000);
-
 
 </script>  
