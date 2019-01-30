@@ -3,6 +3,7 @@
     var ws;
     
     (function openWebSocket() {
+        
         ws = new WebSocket('ws://www.seismicportal.eu/standing_order/websocket')
 
         ws.onopen = (event) => {
@@ -31,6 +32,7 @@
             ws.onclose = function() {};
             ws.close();
         };
+        
     })();
 
 </script>  
