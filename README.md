@@ -13,4 +13,7 @@ Chrome, Firefox and Safari are closing the websocket randomly and interesting en
 
 - Thus, if the WebSocket closes other than the user refreshing the page or navigating away, a new WebSocket connection will be opened again.
 
+Websocket connection still being tested.
+
+
 
